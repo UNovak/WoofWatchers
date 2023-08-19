@@ -1,7 +1,8 @@
 import React from 'react'
+import ProfileSetupt from '../components/profileSetup'
 
 const Registration = () => {
-  return <h1>Registration</h1>
+  return <ProfileSetupt />
 }
 
 export default Registration

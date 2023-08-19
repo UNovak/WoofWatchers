@@ -3,7 +3,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 // custom components imports
-import Navbar from './components/navBar'
+import Nav from './components/navbar'
 
 // pages imports
 import Login from './pages/login'
@@ -18,7 +18,7 @@ function App() {
     <Router>
       <div className='App'>
         <header className='App-header'>
-          <Navbar />
+          <Nav />
           <Routes>
             <Route path='/' element={<Login/>} />
             <Route path='/register' element={<Registration/>} />
