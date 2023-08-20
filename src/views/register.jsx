@@ -1,8 +1,8 @@
 import React from 'react'
-import ProfileSetupt from '../components/onboarding'
+import Form from '../components/userForm'
 
 const Registration = () => {
-  return <ProfileSetupt />
+  return <Form isDisabled={false}/>
 }
 
 export default Registration

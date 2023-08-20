@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import ModeToggle from './modeToggle'
 import { SupabaseClient } from '@supabase/supabase-js'
 import logo from '../images/logo.png'
+import Avatar from './avatar'
 
 const Navbar = () => {
   const logged_in = true
@@ -26,6 +27,7 @@ const Navbar = () => {
             />
             <span style={{ paddingLeft: '10px' }}>WoofWatchers logged in</span>
           </a>
+          <Avatar type={'navbar'} />
         </nav>
       </div>
     )
