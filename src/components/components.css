@@ -15,7 +15,8 @@
 }
 
 .avatar-normal {
-  width: 15px;
-  height: 15px;
+  width: 15vh;
+  height: 15vh;
   border-radius: 5px;
+  border: solid 1px #000000;
 }
