@@ -1,5 +1,5 @@
 import React from 'react'
-import ProfileSetupt from '../components/profileSetup'
+import ProfileSetupt from '../components/onboarding'
 
 const Registration = () => {
   return <ProfileSetupt />

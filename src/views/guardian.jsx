@@ -1,7 +1,7 @@
 import React from "react"
 
-const GuardianHome = () => {
+const Guardian = () => {
   return (<h1>Guardian home</h1>)
 }
 
-export default GuardianHome
+export default Guardian

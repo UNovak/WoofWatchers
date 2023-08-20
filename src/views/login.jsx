@@ -3,13 +3,14 @@ import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { supabase } from '../supabaseClient'
 
 const Login = () => {
-  console.log(Login)
   return (
-    <Auth
-      supabaseClient={supabase}
-      appearance={{ theme: ThemeSupa }}
-      providers={['google']}
-    />
+    <div className='auth-container'>
+      <Auth
+        supabaseClient={supabase}
+        providers={[]}
+        appearance={{ theme: ThemeSupa }}
+      />
+    </div>
   )
 }
 
