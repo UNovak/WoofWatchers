@@ -1,11 +1,11 @@
-import ModeToggle from './modeToggle'
-import { SupabaseClient } from '@supabase/supabase-js'
+import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { supabase } from '../supabaseClient'
 import logo from '../images/logo.png'
 import Avatar from './avatar'
-import { useNavigate, Link } from 'react-router-dom'
-import { supabase } from '../supabaseClient'
+import './components.css'
 
-const Navbar = ({ loginStatus }) => {
+const Navbar = ({ src }) => {
   const navigate = useNavigate()
 
   const signOut = async () => {
@@ -14,50 +14,36 @@ const Navbar = ({ loginStatus }) => {
     navigate('/')
   }
 
-  if (loginStatus)
-    return (
-      <div>
-        {/* <Link to={'/'}>Home</Link>
-        <Link to={'/ownerProfile'}>Owner Profile</Link>
-        <Link to={'/guardianProfile'}>Guardian Profile</Link>
-        <ModeToggle /> */}
-        <nav className='navbar navbar-light bg-light'>
-          <a className='navbar-brand' href='/'>
-            <img
-              src={logo}
-              width='30'
-              height='30'
-              className='d-inline-block align-top'
-              alt=''
-              style={{ marginLeft: '10px' }}
-            />
-            <span style={{ paddingLeft: '10px' }}>WoofWatchers logged in</span>
-          </a>
-          <Avatar type={'navbar'} />
-          <button className='btn btn-secondary' onClick={() => signOut()}>
-            Sign Out
-          </button>
-        </nav>
+  return (
+    <nav className='navbar'>
+      <div className='navbar-left'>
+        <a className='navbar-brand' href='/'>
+          <img
+            src={logo}
+            width='30'
+            height='30'
+            className='d-inline-block align-top'
+            alt='Logo'
+          />
+          <span className='navbar-brand-text'>WoofWatchers</span>
+        </a>
       </div>
-    )
-  else
-    return (
-      <div>
-        <nav className='navbar navbar-light bg-light'>
-          <a className='navbar-brand' href='/'>
-            <img
-              src={logo}
-              width='30'
-              height='30'
-              className='d-inline-block align-top'
-              alt=''
-              style={{ marginLeft: '10px' }}
-            />
-            <span style={{ paddingLeft: '10px' }}>WoofWatchers</span>
-          </a>
-        </nav>
+      <div className='navbar-right'>
+        <Link to={'/search'} className='btn btn-primary mr-2'>
+          Search
+        </Link>
+        <Link to={'/profile'} className='btn btn-primary mr-2'>
+          Profile
+        </Link>
+        <button className='btn btn-secondary mr-2' onClick={() => signOut()}>
+          Sign Out
+        </button>
+        <Link to={'/profile'} className='profile-avatar'>
+          <Avatar src={src} type={'navbar'} />
+        </Link>
       </div>
-    )
+    </nav>
+  )
 }
 
 export default Navbar

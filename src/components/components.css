@@ -1,5 +1,43 @@
-.avatar {
-  vertical-align: middle;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: lightgray;
+  padding: 1rem 2rem;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+}
+
+.navbar-brand-text {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+}
+
+.profile-avatar {
+  margin-right: 1rem;
 }
 
 .avatar-navbar {
@@ -14,11 +52,5 @@
   width: 10vh;
   height: 10vh;
   border-radius: 50%;
-}
-
-.avatar-normal {
-  width: 15vh;
-  height: 15vh;
-  border-radius: 5px;
-  border: solid 1px #000000;
+  margin-top: 3vh
 }

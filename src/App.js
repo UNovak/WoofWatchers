@@ -12,49 +12,66 @@ import Registration from './views/register'
 import Owner from './views/owner'
 import Guardian from './views/guardian'
 import Profile from './views/profile'
+import Search from './views/search'
 
 import './App.css'
 
 const App = () => {
-  const [user, setUser] = useState(null)
-  const [loginStatus, setLoginStatus] = useState(false)
-  const [mode, setMode] = useState('register')
+  const [user, setUser] = useState({
+    user_id: 1,
+    email: 'email@email.com',
+    firstName: 'klara',
+    lastName: 'novak',
+    address: 'mali lipoglav 1a, 1293 smarje sap, slovenia',
+    mode: 'guardian',
+  })
 
-  useEffect(() => {
-    const handleSession = session => {
-      setUser(session?.user ?? null)
-      setLoginStatus(!!session)
-    }
+  const [mode, setMode] = useState(true)
+  const [src, setSrc] = useState('')
 
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        handleSession(session)
-      }
-    )
+  const handleToggle = currentMode => {
+    setMode(!currentMode)
+  }
 
-    handleSession(supabase.auth.getSession())
+  // console.log(mode)
 
-    return () => {
-      supabase.removeAllChannels(authListener)
-    }
-  }, [])
+  const [loginStatus, setLogin] = useState(true)
+
+  const handleUser = newUser => {
+    setUser({ ...user, ...newUser })
+  }
 
   return (
     <div className='App'>
       <header className='App-header'>
-        <Navbar loginStatus={loginStatus} />
+        <Navbar loginStatus={loginStatus} onToggle={handleToggle} mode={mode} />
         <Routes>
+          <Route path='/' element={<Login loginStatus={loginStatus} />} />
           <Route
-            path='/'
-            element={<Login mode={mode} loginStatus={loginStatus} />}
+            path='/register'
+            element={
+              <Registration
+                onToggle={handleToggle}
+                userData={user}
+                onSave={handleUser}
+                mode={mode}
+              />
+            }
           />
-          <Route path='/register' element={<Registration />} />
-          <Route
-            path='/owner'
-            element={<Owner userData={user} email='urban' />}
-          />
+          <Route path='/search' element={<Search />} />
+          <Route path='/owner' element={<Owner userData={user} />} />
           <Route path='/guardian' element={<Guardian userData={user} />} />
-          <Route path='/profile' element={<Profile userData={user} />} />
+          <Route
+            path='/profile'
+            element={
+              <Profile
+                onToggle={handleToggle}
+                userData={user}
+                onSave={handleUser}
+                mode={mode}
+              />
+            }
+          />
         </Routes>
       </header>
     </div>

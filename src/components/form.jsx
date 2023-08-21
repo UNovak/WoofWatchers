@@ -1,22 +1,28 @@
 import React, { useState } from 'react'
 import AddressInput from './addressInput'
 import Avatar from './avatar'
+import ModeToggle from './modetoggle'
 
-function Form({ userData, isDisabled }) {
-  const email = 'example@email.com'
-  const [firstName, setFirstName] = useState('ime')
-  const [lastName, setLastName] = useState('priimek')
-  const [address, setAddress] = useState('')
+function Form({ isDisabled, onSave, userData, onToggle, mode }) {
+  const email = userData.email
+  const [firstName, setFirstName] = useState(userData.firstName)
+  const [lastName, setLastName] = useState(userData.lastName)
+  const [address, setAddress] = useState(userData.address)
 
   const handleAddressChange = newAddress => {
     setAddress(newAddress)
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault() // Prevent form submission and page refresh
+    onSave({ firstName, lastName, address, email })
   }
 
   return (
     <div className='row justify-content-center'>
       <div className='col-lg-4'>
         <Avatar type={'profile'} />
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className='form-group'>
             <label htmlFor='email' className='form-control-sm'>
               Email address
@@ -26,7 +32,7 @@ function Form({ userData, isDisabled }) {
               className='form-control'
               id='email'
               aria-describedby='emailHelp'
-              placeholder={email}
+              value={email}
               disabled
             />
           </div>
@@ -39,8 +45,9 @@ function Form({ userData, isDisabled }) {
               type='text'
               className='form-control'
               id='name'
-              placeholder={firstName}
+              value={firstName}
               disabled={isDisabled}
+              onChange={e => setFirstName(e.target.value)}
             />
           </div>
 
@@ -52,8 +59,9 @@ function Form({ userData, isDisabled }) {
               type='text'
               className='form-control'
               id='lastname'
-              placeholder={lastName}
+              value={lastName}
               disabled={isDisabled}
+              onChange={e => setLastName(e.target.value)}
             />
           </div>
 
@@ -67,6 +75,7 @@ function Form({ userData, isDisabled }) {
               id='name'
               value={address}
               disabled
+              onChange={e => setAddress(e.target.value)}
             />
           </div>
 
@@ -75,6 +84,15 @@ function Form({ userData, isDisabled }) {
               you can change the address here
             </label>
             <AddressInput onChange={handleAddressChange} />
+          </div>
+
+          <div className='form-group container mt-3'>
+            <label name='toggle' className='form-control-sm'>
+              this can be changed later
+            </label>
+            <div className='ml-2 mr-2'>
+              <ModeToggle onToggle={onToggle} mode={mode} />
+            </div>
           </div>
 
           <button type='submit' className='btn btn-primary mt-3'>
