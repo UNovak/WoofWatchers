@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { useState, useEffect } from 'react'
@@ -37,7 +38,7 @@ const App = () => {
 
   const [loginStatus, setLogin] = useState(true)
 
-  const handleStatus = (loginStatus) => { 
+  const handleStatus = loginStatus => {
     setLogin(!loginStatus)
   }
 

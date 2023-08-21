@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import AddressInput from './addressInput'
 import Avatar from './avatar'
-import ModeToggle from './modetoggle'
+import ModeToggle from './toggle'
 
 function Form({ isDisabled, onSave, userData, onToggle, mode }) {
   const email = userData.email
