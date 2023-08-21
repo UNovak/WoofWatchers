@@ -41,16 +41,26 @@
 }
 
 .avatar-navbar {
-  width: 4vh;
+  width: vh;
   height: 4vh;
   border-radius: 50%;
   margin: 0;
   padding: 0;
+  border: solid 1px black;
 }
 
 .avatar-profile {
   width: 10vh;
   height: 10vh;
   border-radius: 50%;
-  margin-top: 3vh
+  margin-top: 3vh;
+  margin-bottom: 1vh;
+  border: solid 1px black;
+}
+
+.avatar-normal {
+      width: 10vh;
+      height: 10vh;
+      border-radius: 5px;
+      margin-top: 3vh
 }

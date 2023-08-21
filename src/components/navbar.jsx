@@ -5,45 +5,74 @@ import logo from '../images/logo.png'
 import Avatar from './avatar'
 import './components.css'
 
-const Navbar = ({ src }) => {
+const Navbar = ({ src, loginStatus, onLoginChange }) => {
   const navigate = useNavigate()
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut()
     console.log('signed out')
+    onLoginChange(loginStatus)
+
     navigate('/')
   }
 
-  return (
-    <nav className='navbar'>
-      <div className='navbar-left'>
-        <a className='navbar-brand' href='/'>
-          <img
-            src={logo}
-            width='30'
-            height='30'
-            className='d-inline-block align-top'
-            alt='Logo'
-          />
-          <span className='navbar-brand-text'>WoofWatchers</span>
-        </a>
-      </div>
-      <div className='navbar-right'>
-        <Link to={'/search'} className='btn btn-primary mr-2'>
-          Search
-        </Link>
-        <Link to={'/profile'} className='btn btn-primary mr-2'>
-          Profile
-        </Link>
-        <button className='btn btn-secondary mr-2' onClick={() => signOut()}>
-          Sign Out
-        </button>
-        <Link to={'/profile'} className='profile-avatar'>
-          <Avatar src={src} type={'navbar'} />
-        </Link>
-      </div>
-    </nav>
-  )
+  const getnavbar = () => {
+    if (loginStatus) {
+      return (
+        <nav className='navbar'>
+          <div className='navbar-left'>
+            <a className='navbar-brand' href='/'>
+              <img
+                src={logo}
+                width='30'
+                height='30'
+                className='d-inline-block align-top'
+                alt='Logo'
+              />
+              <span className='navbar-brand-text'>WoofWatchers</span>
+            </a>
+          </div>
+          <div className='navbar-right'>
+            <Link to={'/search'} className='btn btn-outline-info m-2'>
+              Available Services
+            </Link>
+            <Link to={'/owner'} className='btn btn-outline-info m-2'>
+              MyAnimals
+            </Link>
+            <Link to={'/guardian'} className='btn btn-outline-info m-2'>
+              MyServices
+            </Link>
+            <button
+              className='btn btn-outline-info m-2'
+              onClick={() => signOut()}>
+              Sign Out
+            </button>
+            <Link to={'/profile'} className='profile-avatar'>
+              <Avatar src={src} type={'navbar'} />
+            </Link>
+          </div>
+        </nav>
+      )
+    } else
+      return (
+        <nav className='navbar'>
+          <div className='navbar-left'>
+            <a className='navbar-brand' href='/'>
+              <img
+                src={logo}
+                width='30'
+                height='30'
+                className='d-inline-block align-top'
+                alt='Logo'
+              />
+              <span className='navbar-brand-text'>WoofWatchers</span>
+            </a>
+          </div>
+        </nav>
+      )
+  }
+
+  return <>{getnavbar()}</>
 }
 
 export default Navbar

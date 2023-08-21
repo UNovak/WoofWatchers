@@ -25,7 +25,7 @@ function Form({ isDisabled, onSave, userData, onToggle, mode }) {
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
             <label htmlFor='email' className='form-control-sm'>
-              Email address
+              email address
             </label>
             <input
               type='email'
@@ -39,7 +39,7 @@ function Form({ isDisabled, onSave, userData, onToggle, mode }) {
 
           <div className='form-group'>
             <label htmlFor='name' className='form-control-sm'>
-              name
+              first name
             </label>
             <input
               type='text'
@@ -67,7 +67,7 @@ function Form({ isDisabled, onSave, userData, onToggle, mode }) {
 
           <div className='form-group'>
             <label htmlFor='name' className='form-control-sm'>
-              Address
+              address
             </label>
             <input
               type='text'
@@ -87,9 +87,6 @@ function Form({ isDisabled, onSave, userData, onToggle, mode }) {
           </div>
 
           <div className='form-group container mt-3'>
-            <label name='toggle' className='form-control-sm'>
-              this can be changed later
-            </label>
             <div className='ml-2 mr-2'>
               <ModeToggle onToggle={onToggle} mode={mode} />
             </div>

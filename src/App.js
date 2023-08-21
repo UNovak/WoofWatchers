@@ -37,6 +37,10 @@ const App = () => {
 
   const [loginStatus, setLogin] = useState(true)
 
+  const handleStatus = (loginStatus) => { 
+    setLogin(!loginStatus)
+  }
+
   const handleUser = newUser => {
     setUser({ ...user, ...newUser })
   }
@@ -44,7 +48,7 @@ const App = () => {
   return (
     <div className='App'>
       <header className='App-header'>
-        <Navbar loginStatus={loginStatus} onToggle={handleToggle} mode={mode} />
+        <Navbar loginStatus={loginStatus} onLoginChange={handleStatus} />
         <Routes>
           <Route path='/' element={<Login loginStatus={loginStatus} />} />
           <Route
