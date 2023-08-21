@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, Fragment } from 'react'
 import Form from '../components/userForm'
 import Avatar from '../components/avatar'
 
-function Profile({ userData }) {
+const Profile = ({ userData }) => {
   const email = 'example@email.com'
   const [firstName, setFirstName] = useState('ime')
   const [lastName, setLastName] = useState('priimek')

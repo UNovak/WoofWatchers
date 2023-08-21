@@ -1,7 +1,9 @@
-import React, { Fragment } from 'react'
 import AnimalCard from '../components/animalCard'
 
-const Owner = () => {
+const Owner = ({ userData, email }) => {
+  console.log(userData)
+  console.log(email)
+
   return (
     <div className='container'>
       <div className='row card-container'>

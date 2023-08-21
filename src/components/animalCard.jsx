@@ -23,7 +23,7 @@ const AnimalCard = ({ userData, viewMode }) => {
             <p className='card-text'>{description}</p>
           </div>
 
-          <div class='card-body'>
+          <div className='card-body'>
             <button className='btn btn-primary mt-3'>Edit</button>
           </div>
         </div>

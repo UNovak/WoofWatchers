@@ -1,5 +1,7 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { supabase } from './supabaseClient'
 
 // custom components imports
 import Navbar from './components/navbar'
@@ -13,22 +15,49 @@ import Profile from './views/profile'
 
 import './App.css'
 
-function App() {
+const App = () => {
+  const [user, setUser] = useState(null)
+  const [loginStatus, setLoginStatus] = useState(false)
+  const [mode, setMode] = useState('register')
+
+  useEffect(() => {
+    const handleSession = session => {
+      setUser(session?.user ?? null)
+      setLoginStatus(!!session)
+    }
+
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        handleSession(session)
+      }
+    )
+
+    handleSession(supabase.auth.getSession())
+
+    return () => {
+      supabase.removeAllChannels(authListener)
+    }
+  }, [])
+
   return (
-    <Router>
-      <div className='App'>
-        <header className='App-header'>
-          <Navbar />
-          <Routes>
-            <Route path='/' element={<Login />} />
-            <Route path='/register' element={<Registration />} />
-            <Route path='/owner' element={<Owner />} />
-            <Route path='/guardian' element={<Guardian />} />
-            <Route path='/profile' element={<Profile />} />
-          </Routes>
-        </header>
-      </div>
-    </Router>
+    <div className='App'>
+      <header className='App-header'>
+        <Navbar loginStatus={loginStatus} />
+        <Routes>
+          <Route
+            path='/'
+            element={<Login mode={mode} loginStatus={loginStatus} />}
+          />
+          <Route path='/register' element={<Registration />} />
+          <Route
+            path='/owner'
+            element={<Owner userData={user} email='urban' />}
+          />
+          <Route path='/guardian' element={<Guardian userData={user} />} />
+          <Route path='/profile' element={<Profile userData={user} />} />
+        </Routes>
+      </header>
+    </div>
   )
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import ServiceCard from '../components/serviceCard'
 
-const Owner = () => {
+const Guardian = () => {
   return (
     <div className='container auth-container'>
       <div className='row card-container'>
@@ -28,4 +28,4 @@ const Owner = () => {
   )
 }
 
-export default Owner
+export default Guardian

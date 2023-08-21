@@ -1,14 +1,20 @@
-import { Link } from 'react-router-dom'
 import ModeToggle from './modeToggle'
 import { SupabaseClient } from '@supabase/supabase-js'
 import logo from '../images/logo.png'
 import Avatar from './avatar'
+import { useNavigate, Link } from 'react-router-dom'
+import { supabase } from '../supabaseClient'
 
-const Navbar = () => {
-  const logged_in = true
-  const icon = 0
+const Navbar = ({ loginStatus }) => {
+  const navigate = useNavigate()
 
-  if (logged_in)
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut()
+    console.log('signed out')
+    navigate('/')
+  }
+
+  if (loginStatus)
     return (
       <div>
         {/* <Link to={'/'}>Home</Link>
@@ -28,6 +34,9 @@ const Navbar = () => {
             <span style={{ paddingLeft: '10px' }}>WoofWatchers logged in</span>
           </a>
           <Avatar type={'navbar'} />
+          <button className='btn btn-secondary' onClick={() => signOut()}>
+            Sign Out
+          </button>
         </nav>
       </div>
     )
